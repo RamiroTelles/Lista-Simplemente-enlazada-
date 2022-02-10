@@ -1,3 +1,5 @@
+from operator import truediv
+from tkinter.messagebox import NO
 from Nodo import Nodo
 
 class lista():
@@ -20,27 +22,10 @@ class lista():
             while(aux.siguiente != None):
                 aux = aux.siguiente
             aux.asignarSig(nuevo)
+            self.Cant +=1
             self.final = aux.siguiente
         
-    #def insertar(self,dato,pos):
 
-     #   if pos ==0:
-     #       self.agregar(dato)
-
-     #   elif (pos < (self.Cant-1)):
-     #       aux = self.inicio
-     #       i=0
-     #       nuevo = Nodo(dato)
-#            while (i<pos):
-#                if((i-1)<pos):
-#                    aux.asignarSig(nuevo)
-
-    #            aux = aux.siguiente
-    #        nuevo.asignarSig(aux)
-    #        aux = nuevo
-    #   else:
-    #        print("Ingrese una posición válida")
-    
 
     def imprimir(self):
         if self.Cant!=0:
@@ -52,3 +37,31 @@ class lista():
                 print(aux.dato)
         else:
             print("No tiene elementos")
+
+    def buscar(self,x):
+        aux = self.inicio
+        if aux.dato == x:
+            return True
+        else:
+            while(aux.siguiente!= None):
+                aux = aux.siguiente
+                if aux.dato == x:
+                    return True
+            return False
+    
+    def eliminar(self,pos):
+        aux= self.inicio
+        i=0
+        if pos>(self.Cant-1):
+            print("posicion no válida")
+            return None
+        elif (pos==0):
+            aux = aux.siguiente
+            self.inicio = aux
+        else:
+            while(i<pos-1):
+                aux = aux.siguiente
+                i+=1
+            
+            aux.asignarSig(aux.siguiente.siguiente)
+
